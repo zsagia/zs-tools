@@ -30,6 +30,9 @@
         "api": {
             "tags": []
         },
+        "tools-table": {
+            "tags": []
+        },
         "zs-tools-demo": {
             "tags": []
         },

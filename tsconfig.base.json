@@ -15,7 +15,8 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
-            "@zs-tools/api": ["libs/api/src/index.ts"]
+            "@zs-tools/api": ["libs/api/src/index.ts"],
+            "@zs-tools/tools/table": ["libs/tools/table/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

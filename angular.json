@@ -23,6 +23,28 @@
                 }
             }
         },
+        "tools-table": {
+            "projectType": "library",
+            "root": "libs/tools/table",
+            "sourceRoot": "libs/tools/table/src",
+            "prefix": "zs-tools",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/tools/table"],
+                    "options": {
+                        "jestConfig": "libs/tools/table/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/tools/table/src/**/*.ts", "libs/tools/table/src/**/*.html"]
+                    }
+                }
+            }
+        },
         "zs-tools-demo": {
             "projectType": "application",
             "root": "apps/zs-tools-demo",
