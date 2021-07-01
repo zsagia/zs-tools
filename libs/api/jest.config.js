@@ -1,5 +1,5 @@
 module.exports = {
-    displayName: 'zs-tools-demo',
+    displayName: 'api',
     preset: '../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
@@ -8,7 +8,7 @@ module.exports = {
             stringifyContentPathRegex: '\\.(html|svg)$',
         },
     },
-    coverageDirectory: '../../coverage/apps/zs-tools-demo',
+    coverageDirectory: '../../coverage/libs/api',
     transform: {
         '^.+\\.(ts|js|html)$': 'jest-preset-angular',
     },
