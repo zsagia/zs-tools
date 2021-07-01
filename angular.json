@@ -1,0 +1,149 @@
+{
+    "version": 1,
+    "projects": {
+        "zs-tools-demo": {
+            "projectType": "application",
+            "root": "apps/zs-tools-demo",
+            "sourceRoot": "apps/zs-tools-demo/src",
+            "prefix": "zs-tools",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "outputs": ["{options.outputPath}"],
+                    "options": {
+                        "outputPath": "dist/apps/zs-tools-demo",
+                        "index": "apps/zs-tools-demo/src/index.html",
+                        "main": "apps/zs-tools-demo/src/main.ts",
+                        "polyfills": "apps/zs-tools-demo/src/polyfills.ts",
+                        "tsConfig": "apps/zs-tools-demo/tsconfig.app.json",
+                        "inlineStyleLanguage": "less",
+                        "assets": ["apps/zs-tools-demo/src/favicon.ico", "apps/zs-tools-demo/src/assets"],
+                        "styles": ["apps/zs-tools-demo/src/styles.less"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kb",
+                                    "maximumError": "1mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "2kb",
+                                    "maximumError": "4kb"
+                                }
+                            ],
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/zs-tools-demo/src/environments/environment.ts",
+                                    "with": "apps/zs-tools-demo/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "zs-tools-demo:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "zs-tools-demo:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "zs-tools-demo:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/zs-tools-demo/src/**/*.ts", "apps/zs-tools-demo/src/**/*.html"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/apps/zs-tools-demo"],
+                    "options": {
+                        "jestConfig": "apps/zs-tools-demo/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "zs-tools-demo-e2e": {
+            "root": "apps/zs-tools-demo-e2e",
+            "sourceRoot": "apps/zs-tools-demo-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/zs-tools-demo-e2e/cypress.json",
+                        "tsConfig": "apps/zs-tools-demo-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "zs-tools-demo:serve:development"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "zs-tools-demo:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/zs-tools-demo-e2e/**/*.{js,ts}"]
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
+    },
+    "schematics": {
+        "@nrwl/angular": {
+            "application": {
+                "linter": "eslint"
+            },
+            "library": {
+                "linter": "eslint"
+            },
+            "storybook-configuration": {
+                "linter": "eslint"
+            }
+        },
+        "@nrwl/angular:application": {
+            "style": "less",
+            "linter": "eslint",
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "style": "less",
+            "linter": "eslint",
+            "unitTestRunner": "jest"
+        },
+        "@nrwl/angular:component": {
+            "style": "less"
+        }
+    },
+    "defaultProject": "zs-tools-demo"
+}
