@@ -1,1 +1,2 @@
-export * from './lib/util-faker.module';
+export * from './lib/football/football-faker.module';
+export * from './lib/handball/handball-faker.module';
