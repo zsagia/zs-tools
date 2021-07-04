@@ -16,6 +16,7 @@
         "baseUrl": ".",
         "paths": {
             "@zs-tools/api": ["libs/api/src/index.ts"],
+            "@zs-tools/tools/match": ["libs/tools/match/src/index.ts"],
             "@zs-tools/tools/table": ["libs/tools/table/src/index.ts"],
             "@zs-tools/util/faker": ["libs/util/faker/src/index.ts"]
         }

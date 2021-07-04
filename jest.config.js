@@ -4,5 +4,6 @@ module.exports = {
         '<rootDir>/libs/api',
         '<rootDir>/libs/tools/table',
         '<rootDir>/libs/util/faker',
+        '<rootDir>/libs/tools/match',
     ],
 };

@@ -23,6 +23,28 @@
                 }
             }
         },
+        "tools-match": {
+            "projectType": "library",
+            "root": "libs/tools/match",
+            "sourceRoot": "libs/tools/match/src",
+            "prefix": "zs-tools",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/tools/match"],
+                    "options": {
+                        "jestConfig": "libs/tools/match/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/tools/match/src/**/*.ts", "libs/tools/match/src/**/*.html"]
+                    }
+                }
+            }
+        },
         "tools-table": {
             "projectType": "library",
             "root": "libs/tools/table",

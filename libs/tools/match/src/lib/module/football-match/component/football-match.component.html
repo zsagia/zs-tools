@@ -1,0 +1,16 @@
+<div class="match football-match">
+    <div class="header" *ngIf="isHeader">
+        <p>{{ match?.date | date }}</p>
+        <p></p>
+    </div>
+
+    <div class="content">
+        <p class="team team1">
+            {{ match?.team1 }}
+        </p>
+
+        <p class="team team2">
+            {{ match?.team2 }}
+        </p>
+    </div>
+</div>
