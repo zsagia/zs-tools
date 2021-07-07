@@ -2,5 +2,23 @@
     <h1>Welcome to {{ title }}!</h1>
 </header>
 <main>
-    <ndc-dynamic [ndcDynamicComponent]="component$$ | async" [ndcDynamicInputs]="inputs$$ | async"> </ndc-dynamic>
+    <section>
+        <zs-football-match [showHeader]="false" [showTimeAsSeparator]="true" [match]="match"></zs-football-match>
+        <zs-football-match [showHeader]="false" [showTimeAsSeparator]="true" [match]="match2"></zs-football-match>
+    </section>
+
+    <section>
+        <zs-football-match [match]="match"></zs-football-match>
+        <zs-football-match [match]="match2"></zs-football-match>
+    </section>
+
+    <section>
+        <zs-football-match [showHeader]="true" [showTimeAsSeparator]="false" [match]="match"></zs-football-match>
+        <zs-football-match [showHeader]="true" [showTimeAsSeparator]="false" [match]="match2"></zs-football-match>
+    </section>
+
+    <section>
+        <zs-football-match [showHeader]="false" [showResult]="true" [match]="match"></zs-football-match>
+        <zs-football-match [showHeader]="false" [showResult]="true" [match]="match2"></zs-football-match>
+    </section>
 </main>

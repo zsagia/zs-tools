@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatchModel, ModelFactory } from '@zs-tools/api';
+import { FootballMatchModel, MatchModel, ModelFactory } from '@zs-tools/api';
 import { ReplaySubject, Subject } from 'rxjs';
-import { MatchComponent, FootballMatchComponent } from '@zs-tools/tools/match';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,7 +11,8 @@ import { MatchComponent, FootballMatchComponent } from '@zs-tools/tools/match';
 export class AppComponent implements OnInit {
     public title = 'zs-tools-demo';
 
-    public match: MatchModel | undefined;
+    public match: FootballMatchModel | undefined;
+    public match2: FootballMatchModel | undefined;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public component$$: Subject<any> | undefined;
@@ -25,9 +25,14 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.match = this.modelFactory.createMatch();
+        this.match = this.modelFactory.createMatch() as FootballMatchModel;
+        this.match2 = this.modelFactory.createMatch() as FootballMatchModel;
+        
+        const matches = this.modelFactory.createMatches();
+        const rounds = this.modelFactory.createChampionshipRounds();
 
-        this.component$$?.next(FootballMatchComponent);
+        console.log(matches);
+        console.log(rounds);
 
         this.inputs$$?.next({
             match: this.match,

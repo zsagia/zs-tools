@@ -1,5 +1,10 @@
-import { MatchModel } from '@zs-tools/api';
+
+import { FixtureModel, MatchModel } from '../model';
 
 export abstract class ModelFactory {
     public abstract createMatch(): MatchModel;
+
+    public abstract createMatches(): FixtureModel[];
+
+    public abstract createChampionshipRounds(): any[];
 }

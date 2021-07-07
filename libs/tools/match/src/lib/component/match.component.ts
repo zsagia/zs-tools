@@ -8,7 +8,11 @@ export class MatchComponent extends BaseComponent {
     @Input()
     public match: MatchModel | undefined;
     @Input()
-    public isHeader = false;
+    public showHeader = false;
+    @Input()
+    public showResult = false;
+    @Input()
+    public showTimeAsSeparator = false;
 
     public constructor() {
         super();

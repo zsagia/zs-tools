@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
-import { MatchModel, ModelFactory } from '@zs-tools/api';
+import { FixtureModel, MatchModel, ModelFactory } from '@zs-tools/api';
 
 import { HandballBuilder } from '../builder';
 
 @Injectable()
 export class HandballModelFactory extends ModelFactory {
+    public createChampionshipRounds(): any[] {
+        throw new Error('Method not implemented.');
+    }
+    public createMatches(): FixtureModel[] {
+        throw new Error('Method not implemented.');
+    }
     public constructor(private handballBuilder: HandballBuilder) {
         super();
     }

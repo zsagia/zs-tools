@@ -1,16 +1,38 @@
 <div class="match football-match">
-    <div class="header" *ngIf="isHeader">
-        <p>{{ match?.date | date }}</p>
-        <p></p>
+    <div class="header" *ngIf="showHeader">
+        <div>{{ match?.date | date:"medium" }}</div>
+        <div></div>
     </div>
 
     <div class="content">
-        <p class="team team1">
+        <div class="team team1 item">
             {{ match?.team1 }}
-        </p>
+        </div>
 
-        <p class="team team2">
+        <div class="separator item" *ngIf="!showTimeAsSeparator">-</div>
+
+        <div class="time" *ngIf="showTimeAsSeparator">
+            {{ match?.date | date:"HH:mm"}}
+        </div>
+
+        <div class="team team2 item">
             {{ match?.team2 }}
-        </p>
+        </div> 
+    </div>
+
+    <div class="result" *ngIf="showResult">
+        <div class="period team1">
+            <div class="left">{{ match?.result?.team1Final }}</div>
+            <div class="center">-</div>
+            <div class="right">{{ match?.result?.team2Final }}</div>
+        </div>
+
+        <div class="separator"> </div>
+
+        <div class="period team2">
+            <div class="left">{{ match?.result?.team1Half1 }}</div>
+            <div class="center">-</div>
+            <div class="right">{{ match?.result?.team2Half2 }}</div>
+        </div>
     </div>
 </div>
