@@ -1,4 +1,3 @@
-
 import { FixtureModel, MatchModel } from '../model';
 
 export abstract class ModelFactory {
@@ -6,5 +5,5 @@ export abstract class ModelFactory {
 
     public abstract createMatches(): FixtureModel[];
 
-    public abstract createChampionshipRounds(): any[];
+    public abstract createRounds(): FixtureModel[][];
 }

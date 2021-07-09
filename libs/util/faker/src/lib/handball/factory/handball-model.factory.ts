@@ -5,7 +5,7 @@ import { HandballBuilder } from '../builder';
 
 @Injectable()
 export class HandballModelFactory extends ModelFactory {
-    public createChampionshipRounds(): any[] {
+    public createRounds(): FixtureModel[][] {
         throw new Error('Method not implemented.');
     }
     public createMatches(): FixtureModel[] {

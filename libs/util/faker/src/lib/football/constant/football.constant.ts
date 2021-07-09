@@ -9,4 +9,18 @@ export const FootballClubNames = {
         'Chelsea',
         'Everton',
     ],
+    hungary: [
+        'Ferencvárosi TC',
+        'Kisvárda',
+        'Gyirmót',
+        'MTK Budapest',
+        'Honvéd FC',
+        'Debreceni VSC',
+        'Paks',
+        'Mezőkövesd',
+        'Újpest',
+        'Puskás Akadémia',
+        'Zalaegerszeg',
+        'MOL Fehérvár FC',
+    ],
 };

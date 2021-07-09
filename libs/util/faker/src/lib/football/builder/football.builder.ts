@@ -10,27 +10,25 @@ import {
     SportCategoryEnum,
 } from '@zs-tools/api';
 
-import { FootballClubNames } from '../constant';
-
 @Injectable()
 export class FootballBuilder extends FakerBuilder {
     public readonly TEAM1_GOALS = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 4];
     public readonly TEAM2_GOALS = [0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
 
-    public buildFixture(date?: Date, team1?: string, team2?: string): FixtureModel {
+    public buildFixture(date: Date | undefined, team1: string, team2: string): FixtureModel {
         return {
             id: this.createId(),
             competition: CompetitionTypes.TRAINING,
             sportCategory: SportCategoryEnum.FOOTBALL,
-            team1: team1 || this.createClubName(FootballClubNames.england),
-            team2: team2 || this.createClubName(FootballClubNames.england),
+            team1,
+            team2,
             date: date || this.createSoonDate(),
         };
     }
 
-    public buildMatch(date?: Date): MatchModel {
+    public buildMatch(date: Date | undefined, team1: string, team2: string): MatchModel {
         return {
-            ...this.buildFixture(date),
+            ...this.buildFixture(date, team1, team2),
             result: this.buildResult(),
         };
     }
@@ -55,23 +53,11 @@ export class FootballBuilder extends FakerBuilder {
         };
     }
 
-    public buildRoundMatches(round: number, teamNames: string[]): FixtureModel[] {
-        const teamNamesHelper = [...teamNames];
-
-        return Array.from({ length: teamNames.length / 2 }, () => {
-            const team1 = faker.random.arrayElement(teamNamesHelper);
-
-            teamNamesHelper.splice(teamNamesHelper.indexOf(team1), 1);
-
-            const team2 = faker.random.arrayElement(teamNamesHelper);
-
-            teamNamesHelper.splice(teamNamesHelper.indexOf(team2), 1);
-
-            return this.buildFixture(undefined, team1, team2);
-        });
+    public buildRound(roundItems: string[][]): FixtureModel[] {
+        return roundItems.map((roundItem) => this.buildMatch(undefined, roundItem[0], roundItem[1]));
     }
 
-    public createChampionshipRounds(): any[] {
-        return this.createRounds(FootballClubNames.england);
+    public buildRounds(teamNames: string[]): FixtureModel[][] {
+        return this.calculateHomeAway(this.createRoundItems(teamNames)).map((roundItem) => this.buildRound(roundItem));
     }
 }

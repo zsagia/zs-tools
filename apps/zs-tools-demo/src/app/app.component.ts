@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FootballMatchModel, MatchModel, ModelFactory } from '@zs-tools/api';
+import { FootballMatchModule } from '@zs-tools/tools/match';
 import { ReplaySubject, Subject } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
 
     public match: FootballMatchModel | undefined;
     public match2: FootballMatchModel | undefined;
+    public rounds: FootballMatchModel[][] | undefined;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public component$$: Subject<any> | undefined;
@@ -27,12 +29,10 @@ export class AppComponent implements OnInit {
     public ngOnInit(): void {
         this.match = this.modelFactory.createMatch() as FootballMatchModel;
         this.match2 = this.modelFactory.createMatch() as FootballMatchModel;
-        
-        const matches = this.modelFactory.createMatches();
-        const rounds = this.modelFactory.createChampionshipRounds();
 
-        console.log(matches);
-        console.log(rounds);
+        this.rounds = this.modelFactory.createRounds() as FootballMatchModel[][];
+
+        console.log(this.rounds);
 
         this.inputs$$?.next({
             match: this.match,

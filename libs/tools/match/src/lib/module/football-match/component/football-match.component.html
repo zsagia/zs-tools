@@ -1,6 +1,6 @@
 <div class="match football-match">
     <div class="header" *ngIf="showHeader">
-        <div>{{ match?.date | date:"medium" }}</div>
+        <div>{{ match?.date | date: 'medium' }}</div>
         <div></div>
     </div>
 
@@ -12,12 +12,12 @@
         <div class="separator item" *ngIf="!showTimeAsSeparator">-</div>
 
         <div class="time" *ngIf="showTimeAsSeparator">
-            {{ match?.date | date:"HH:mm"}}
+            {{ match?.date | date: 'HH:mm' }}
         </div>
 
         <div class="team team2 item">
             {{ match?.team2 }}
-        </div> 
+        </div>
     </div>
 
     <div class="result" *ngIf="showResult">
@@ -27,7 +27,7 @@
             <div class="right">{{ match?.result?.team2Final }}</div>
         </div>
 
-        <div class="separator"> </div>
+        <div class="separator"></div>
 
         <div class="period team2">
             <div class="left">{{ match?.result?.team1Half1 }}</div>

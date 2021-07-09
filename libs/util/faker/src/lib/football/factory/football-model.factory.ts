@@ -11,14 +11,14 @@ export class FootballModelFactory extends ModelFactory {
     }
 
     public createMatch(): MatchModel {
-        return this.footballBuilder.buildMatch();
+        return this.footballBuilder.buildMatch(undefined, FootballClubNames.england[0], FootballClubNames.england[1]);
     }
 
     public createMatches(): FixtureModel[] {
-        return this.footballBuilder.buildRoundMatches(1, FootballClubNames.england);
+        return [];
     }
 
-    public createChampionshipRounds(): any[] {
-        return this.footballBuilder.createChampionshipRounds()
+    public createRounds(): FixtureModel[][] {
+        return this.footballBuilder.buildRounds(FootballClubNames.hungary);
     }
 }

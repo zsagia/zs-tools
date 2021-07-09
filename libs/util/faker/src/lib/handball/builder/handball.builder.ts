@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CompetitionTypes, FakerBuilder, FixtureModel, MatchModel, ResultModel, SportCategoryEnum } from '@zs-tools/api';
+import {
+    CompetitionTypes,
+    FakerBuilder,
+    FixtureModel,
+    MatchModel,
+    ResultModel,
+    SportCategoryEnum,
+} from '@zs-tools/api';
 
 import { HandballClubNames } from '../constant';
 
@@ -30,11 +37,11 @@ export class HandballBuilder extends FakerBuilder {
         return {};
     }
 
-    public buildRoundMatches(round: number, teamNames: string[]): FixtureModel[] {
+    public buildRound(roundItems: string[][]): FixtureModel[] {
         throw new Error('Method not implemented.');
     }
 
-    public createChampionshipRounds(): any[] {
+    public buildRounds(teamNames: string[]): FixtureModel[][] {
         throw new Error('Method not implemented.');
     }
 }

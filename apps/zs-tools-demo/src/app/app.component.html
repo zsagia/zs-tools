@@ -1,6 +1,7 @@
 <header class="flex">
     <h1>Welcome to {{ title }}!</h1>
 </header>
+
 <main>
     <section>
         <zs-football-match [showHeader]="false" [showTimeAsSeparator]="true" [match]="match"></zs-football-match>
@@ -20,5 +21,15 @@
     <section>
         <zs-football-match [showHeader]="false" [showResult]="true" [match]="match"></zs-football-match>
         <zs-football-match [showHeader]="false" [showResult]="true" [match]="match2"></zs-football-match>
+    </section>
+
+    <section>
+        <div class="round" *ngFor="let round of rounds; let i = index">
+            <header>Round {{ i + 1 }}.</header>
+
+            <div class="matches">
+                <zs-football-match *ngFor="let match of round" [match]="match" [showResult]="true"></zs-football-match>
+            </div>
+        </div>
     </section>
 </main>
