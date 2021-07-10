@@ -2,7 +2,7 @@ import { CompetitionTypes, SportCategoryEnum } from '../enum';
 
 export interface FixtureModel {
     competition: CompetitionTypes;
-    date: Date;
+    date?: Date;
     id: string;
     round?: number;
     sportCategory: SportCategoryEnum;

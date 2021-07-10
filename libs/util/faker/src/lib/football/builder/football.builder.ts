@@ -1,3 +1,4 @@
+import { add, endOfWeek, Interval, startOfWeek } from 'date-fns';
 import * as faker from 'faker';
 
 import { Injectable } from '@angular/core';
@@ -15,14 +16,39 @@ export class FootballBuilder extends FakerBuilder {
     public readonly TEAM1_GOALS = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 4];
     public readonly TEAM2_GOALS = [0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
 
-    public buildFixture(date: Date | undefined, team1: string, team2: string, round?: number): FixtureModel {
+    public addDatesForRounds(rounds: FixtureModel[][], startDate: Date): FixtureModel[][] {
+        let workDate = new Date(startDate);
+        let roundInterval: Interval = {
+            start: startOfWeek(workDate),
+            end: endOfWeek(workDate),
+        };
+
+        return rounds.map((round) => {
+            const modifiedRound = round.map((match) => {
+                const randomizedDate = faker.date.between(new Date(roundInterval.start), new Date(roundInterval.end));
+
+                match.date = randomizedDate;
+
+                return match;
+            });
+
+            workDate = add(workDate, { weeks: 1 });
+            roundInterval = {
+                start: startOfWeek(workDate),
+                end: endOfWeek(workDate),
+            };
+
+            return modifiedRound;
+        });
+    }
+
+    public buildFixture(team1: string, team2: string, round?: number): FixtureModel {
         const fixture: FixtureModel = {
             id: this.createId(),
             competition: CompetitionTypes.TRAINING,
             sportCategory: SportCategoryEnum.FOOTBALL,
             team1,
             team2,
-            date: date || this.createSoonDate(),
         };
 
         if (round !== undefined) {
@@ -34,7 +60,8 @@ export class FootballBuilder extends FakerBuilder {
 
     public buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel {
         return {
-            ...this.buildFixture(date, team1, team2, round),
+            ...this.buildFixture(team1, team2, round),
+            date: date || this.createSoonDate(),
             result: this.buildResult(),
         };
     }
@@ -60,7 +87,7 @@ export class FootballBuilder extends FakerBuilder {
     }
 
     public buildRound(roundItems: string[][], round: number): FixtureModel[] {
-        return roundItems.map((roundItem) => this.buildFixture(undefined, roundItem[0], roundItem[1], round));
+        return roundItems.map((roundItem) => this.buildFixture(roundItem[0], roundItem[1], round));
     }
 
     public buildRounds(teamNames: string[]): FixtureModel[][] {

@@ -4,23 +4,23 @@
 
 <main>
     <section>
-        <zs-football-match [showHeader]="false" [showTimeAsSeparator]="true" [match]="match"></zs-football-match>
-        <zs-football-match [showHeader]="false" [showTimeAsSeparator]="true" [match]="match2"></zs-football-match>
+        <zs-football-match [showHeader]="false" [mode]="mode" [showTimeAsSeparator]="true" [match]="match"></zs-football-match>
+        <zs-football-match [showHeader]="false" [mode]="mode" [showTimeAsSeparator]="true" [match]="match2"></zs-football-match>
     </section>
 
     <section>
-        <zs-football-match [match]="match"></zs-football-match>
-        <zs-football-match [match]="match2"></zs-football-match>
+        <zs-football-match [mode]="mode" [match]="match"></zs-football-match>
+        <zs-football-match [mode]="mode" [match]="match2"></zs-football-match>
     </section>
 
     <section>
-        <zs-football-match [showHeader]="true" [showTimeAsSeparator]="false" [match]="match"></zs-football-match>
-        <zs-football-match [showHeader]="true" [showTimeAsSeparator]="false" [match]="match2"></zs-football-match>
+        <zs-football-match [mode]="mode" [showHeader]="true" [showTimeAsSeparator]="false" [match]="match"></zs-football-match>
+        <zs-football-match [mode]="mode" [showHeader]="true" [showTimeAsSeparator]="false" [match]="match2"></zs-football-match>
     </section>
 
     <section>
-        <zs-football-match [showHeader]="false" [showResult]="true" [match]="match"></zs-football-match>
-        <zs-football-match [showHeader]="false" [showResult]="true" [match]="match2"></zs-football-match>
+        <zs-football-match [mode]="mode" [showHeader]="false" [showResult]="true" [match]="match"></zs-football-match>
+        <zs-football-match [mode]="mode" [showHeader]="false" [showResult]="true" [match]="match2"></zs-football-match>
     </section>
 
     <section>

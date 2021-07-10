@@ -3,7 +3,8 @@ import * as faker from 'faker';
 import { FixtureModel, MatchModel } from '../model';
 
 export abstract class FakerBuilder {
-    public abstract buildFixture(date: Date | undefined, team1: string, team2: string, round?: number): FixtureModel;
+    public abstract addDatesForRounds(rounds: FixtureModel[][], startDate: Date): FixtureModel[][];
+    public abstract buildFixture(team1: string, team2: string, round?: number): FixtureModel;
     public abstract buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel;
     public abstract buildRound(roundItems: string[][], round: number): FixtureModel[];
     public abstract buildRounds(teamNames: string[]): FixtureModel[][];

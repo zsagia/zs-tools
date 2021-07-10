@@ -1,36 +1,26 @@
 import { Injectable } from '@angular/core';
 import {
-    CompetitionTypes,
     FakerBuilder,
     FixtureModel,
     MatchModel,
     ResultModel,
-    SportCategoryEnum,
 } from '@zs-tools/api';
-
-import { HandballClubNames } from '../constant';
 
 @Injectable()
 export class HandballBuilder extends FakerBuilder {
     public readonly MAX_GOALS = 3;
     public readonly MIN_GOALS = 0;
 
-    public buildFixture(date?: Date): FixtureModel {
-        return {
-            competition: CompetitionTypes.TRAINING,
-            id: this.createId(),
-            sportCategory: SportCategoryEnum.HANDBALL,
-            team1: this.createClubName(HandballClubNames.hungary),
-            team2: this.createClubName(HandballClubNames.hungary),
-            date: date || this.createSoonDate(),
-        };
+    public addDatesForRounds(rounds: FixtureModel[][], startDate: Date): FixtureModel[][] {
+        throw new Error('Method not implemented.');
     }
 
-    public buildMatch(date?: Date): MatchModel {
-        return {
-            ...this.buildFixture(date),
-            result: this.buildResult(),
-        };
+    public buildFixture(team1: string, team2: string, round?: number): FixtureModel {
+        throw new Error('Method not implemented.');
+    }
+
+    public buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel {
+        throw new Error('Method not implemented.');
     }
 
     public buildResult(): ResultModel {
