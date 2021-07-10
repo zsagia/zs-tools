@@ -37,7 +37,7 @@ export class HandballBuilder extends FakerBuilder {
         return {};
     }
 
-    public buildRound(roundItems: string[][]): FixtureModel[] {
+    public buildRound(roundItems: string[][], round: number): FixtureModel[] {
         throw new Error('Method not implemented.');
     }
 

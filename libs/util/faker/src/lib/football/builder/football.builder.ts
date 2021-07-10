@@ -15,8 +15,8 @@ export class FootballBuilder extends FakerBuilder {
     public readonly TEAM1_GOALS = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 4];
     public readonly TEAM2_GOALS = [0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
 
-    public buildFixture(date: Date | undefined, team1: string, team2: string): FixtureModel {
-        return {
+    public buildFixture(date: Date | undefined, team1: string, team2: string, round?: number): FixtureModel {
+        const fixture: FixtureModel = {
             id: this.createId(),
             competition: CompetitionTypes.TRAINING,
             sportCategory: SportCategoryEnum.FOOTBALL,
@@ -24,11 +24,17 @@ export class FootballBuilder extends FakerBuilder {
             team2,
             date: date || this.createSoonDate(),
         };
+
+        if (round !== undefined) {
+            fixture.round = round;
+        }
+
+        return fixture;
     }
 
-    public buildMatch(date: Date | undefined, team1: string, team2: string): MatchModel {
+    public buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel {
         return {
-            ...this.buildFixture(date, team1, team2),
+            ...this.buildFixture(date, team1, team2, round),
             result: this.buildResult(),
         };
     }
@@ -53,11 +59,13 @@ export class FootballBuilder extends FakerBuilder {
         };
     }
 
-    public buildRound(roundItems: string[][]): FixtureModel[] {
-        return roundItems.map((roundItem) => this.buildMatch(undefined, roundItem[0], roundItem[1]));
+    public buildRound(roundItems: string[][], round: number): FixtureModel[] {
+        return roundItems.map((roundItem) => this.buildFixture(undefined, roundItem[0], roundItem[1], round));
     }
 
     public buildRounds(teamNames: string[]): FixtureModel[][] {
-        return this.calculateHomeAway(this.createRoundItems(teamNames)).map((roundItem) => this.buildRound(roundItem));
+        return this.calculateHomeAway(this.createRoundItems(teamNames)).map((roundItem, index) =>
+            this.buildRound(roundItem, index)
+        );
     }
 }
