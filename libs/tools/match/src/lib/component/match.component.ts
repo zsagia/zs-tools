@@ -4,7 +4,7 @@ import { BaseComponent, MatchModel } from '@zs-tools/api';
 @Component({
     template: '',
 })
-export class MatchComponent extends BaseComponent {
+export abstract class MatchComponent extends BaseComponent {
     @Input()
     public match: MatchModel | undefined;
     @Input()
