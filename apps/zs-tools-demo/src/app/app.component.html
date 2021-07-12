@@ -4,8 +4,18 @@
 
 <main>
     <section>
-        <zs-football-match [showHeader]="false" [mode]="mode" [showTimeAsSeparator]="true" [match]="match"></zs-football-match>
-        <zs-football-match [showHeader]="false" [mode]="mode" [showTimeAsSeparator]="true" [match]="match2"></zs-football-match>
+        <zs-football-match
+            [showHeader]="false"
+            [mode]="mode"
+            [showTimeAsSeparator]="true"
+            [match]="match"
+        ></zs-football-match>
+        <zs-football-match
+            [showHeader]="false"
+            [mode]="mode"
+            [showTimeAsSeparator]="true"
+            [match]="match2"
+        ></zs-football-match>
     </section>
 
     <section>
@@ -14,8 +24,18 @@
     </section>
 
     <section>
-        <zs-football-match [mode]="mode" [showHeader]="true" [showTimeAsSeparator]="false" [match]="match"></zs-football-match>
-        <zs-football-match [mode]="mode" [showHeader]="true" [showTimeAsSeparator]="false" [match]="match2"></zs-football-match>
+        <zs-football-match
+            [mode]="mode"
+            [showHeader]="true"
+            [showTimeAsSeparator]="false"
+            [match]="match"
+        ></zs-football-match>
+        <zs-football-match
+            [mode]="mode"
+            [showHeader]="true"
+            [showTimeAsSeparator]="false"
+            [match]="match2"
+        ></zs-football-match>
     </section>
 
     <section>
@@ -29,6 +49,21 @@
 
             <div class="matches">
                 <zs-football-match *ngFor="let match of round" [match]="match" [showResult]="false"></zs-football-match>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="match-list" *ngFor="let entry of matchLists$$ | async">
+            <header>{{ entry.key }}</header>
+
+            <div class="matches">
+                <zs-football-match
+                    *ngFor="let match of entry.value"
+                    [match]="match"
+                    [showTimeAsSeparator]="true"
+                    [mode]="mode"
+                ></zs-football-match>
             </div>
         </div>
     </section>

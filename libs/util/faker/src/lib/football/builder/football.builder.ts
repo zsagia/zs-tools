@@ -1,4 +1,4 @@
-import { add, endOfWeek, Interval, startOfWeek } from 'date-fns';
+import { add, endOfWeek, Interval, startOfWeek, subDays } from 'date-fns';
 import * as faker from 'faker';
 
 import { Injectable } from '@angular/core';
@@ -25,7 +25,14 @@ export class FootballBuilder extends FakerBuilder {
 
         return rounds.map((round) => {
             const modifiedRound = round.map((match) => {
-                const randomizedDate = faker.date.between(new Date(roundInterval.start), new Date(roundInterval.end));
+                const randomizedWeekDays = faker.datatype.number(4);
+                const endDate = new Date(roundInterval.end);
+                const randomizedDate = faker.date.between(subDays(endDate, randomizedWeekDays), endDate);
+
+                randomizedDate.setMilliseconds(0);
+                randomizedDate.setSeconds(0);
+                randomizedDate.setMinutes(0);
+                randomizedDate.setHours(faker.random.arrayElement([13, 15, 17, 19, 21]));
 
                 match.date = randomizedDate;
 

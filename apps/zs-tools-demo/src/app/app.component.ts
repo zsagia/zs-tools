@@ -4,6 +4,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FootballMatchModel, ModelFactory } from '@zs-tools/api';
 import { FootballBuilder } from '@zs-tools/util/faker';
 import { MatchViewModeEnum } from '@zs-tools/tools/match';
+import { KeyValue } from '@angular/common';
+import { startOfDay } from 'date-fns';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,12 +21,14 @@ export class AppComponent implements OnInit {
     public match: FootballMatchModel | undefined;
     public match2: FootballMatchModel | undefined;
     public rounds: FootballMatchModel[][] | undefined;
+    public matchLists$$: Subject<KeyValue<string, FootballMatchModel[]>[]>;
     public title = 'zs-tools-demo';
     public mode = MatchViewModeEnum.LEFT;
 
     public constructor(private modelFactory: ModelFactory, private footballBuilder: FootballBuilder) {
         this.component$$ = new ReplaySubject();
         this.inputs$$ = new ReplaySubject();
+        this.matchLists$$ = new ReplaySubject();
     }
 
     public ngOnInit(): void {
@@ -44,5 +48,38 @@ export class AppComponent implements OnInit {
         });
 
         console.log(this.match);
+
+        this.matchLists$$.next(this.createMatchLists(this.rounds));
+    }
+
+    private createMatchLists(rounds: FootballMatchModel[][]): KeyValue<string, FootballMatchModel[]>[] {
+        const matches = rounds.reduce((accumulator, round) => {
+            accumulator.push(...round);
+
+            return accumulator;
+        }, []);
+
+        const matchMap: Map<string, FootballMatchModel[]> = new Map();
+
+        matches
+            .sort((a, b) => {
+                const aDate = a.date ? a.date : '';
+                const bDate = b.date ? b.date : '';
+
+                return aDate < bDate ? -1 : 1;
+            })
+            .forEach((match) => {
+                const matchDateAsString = match.date ? startOfDay(match.date).toDateString() : '';
+                const dateMatches = matchMap.get(matchDateAsString) || [];
+
+                dateMatches.push(match);
+
+                matchMap.set(matchDateAsString, dateMatches);
+            });
+
+        return Array.from(matchMap.entries()).map((entry) => ({
+            key: entry[0],
+            value: entry[1],
+        }));
     }
 }

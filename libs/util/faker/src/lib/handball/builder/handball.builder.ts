@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-    FakerBuilder,
-    FixtureModel,
-    MatchModel,
-    ResultModel,
-} from '@zs-tools/api';
+import { FakerBuilder, FixtureModel, MatchModel, ResultModel } from '@zs-tools/api';
 
 @Injectable()
 export class HandballBuilder extends FakerBuilder {
