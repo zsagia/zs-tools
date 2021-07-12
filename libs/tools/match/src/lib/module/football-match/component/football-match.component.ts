@@ -25,7 +25,7 @@ export class FootballMatchComponent extends MatchComponent implements OnInit {
     @Input()
     public mode = MatchViewModeEnum.RIGHT;
     @Input()
-    public showLogo = false;
+    public showLogo = true;
 
     public constructor(private componentService: FootballMatchService) {
         super();

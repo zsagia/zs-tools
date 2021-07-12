@@ -128,7 +128,7 @@
                         "tsConfig": "apps/zs-tools-demo/tsconfig.app.json",
                         "inlineStyleLanguage": "less",
                         "assets": ["apps/zs-tools-demo/src/favicon.ico", "apps/zs-tools-demo/src/assets"],
-                        "styles": ["apps/zs-tools-demo/src/styles.less"],
+                        "styles": ["./node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/zs-tools-demo/src/styles.less"],
                         "scripts": []
                     },
                     "configurations": {
