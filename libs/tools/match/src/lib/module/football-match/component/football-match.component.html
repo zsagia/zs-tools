@@ -6,7 +6,10 @@
 
     <div class="content" ngClass="{{ mode }}">
         <div class="team team1 item">
-            {{ match?.team1 }}
+            <span class="logo" *ngIf="showLogo"
+                ><img src="assets/logos/{{ match?.team1?.logo }}" height="20" alt=""
+            /></span>
+            <span>{{ match?.team1?.name }}</span>
         </div>
 
         <div class="separator item" *ngIf="!showTimeAsSeparator">-</div>
@@ -16,7 +19,10 @@
         </div>
 
         <div class="team team2 item">
-            {{ match?.team2 }}
+            <span>{{ match?.team2?.name }}</span>
+            <span class="logo" *ngIf="showLogo"
+                ><img src="assets/logos/{{ match?.team2?.logo }}" height="20" alt=""
+            /></span>
         </div>
     </div>
 

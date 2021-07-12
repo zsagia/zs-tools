@@ -50,6 +50,17 @@ export class AppComponent implements OnInit {
         console.log(this.match);
 
         this.matchLists$$.next(this.createMatchLists(this.rounds));
+
+        this.rounds = [
+            ...this.rounds.map((round) =>
+                round.map((match) => {
+                    this.footballBuilder.addResult(match);
+                    this.rounds = [...modifiedRounds] as FootballMatchModel[][];
+
+                    return match;
+                })
+            ),
+        ];
     }
 
     private createMatchLists(rounds: FootballMatchModel[][]): KeyValue<string, FootballMatchModel[]>[] {

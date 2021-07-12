@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FakerBuilder, FixtureModel, MatchModel, ResultModel } from '@zs-tools/api';
+import { ClubModel, FakerBuilder, FixtureModel, MatchModel, ResultModel } from '@zs-tools/api';
 
 @Injectable()
 export class HandballBuilder extends FakerBuilder {
@@ -10,11 +10,15 @@ export class HandballBuilder extends FakerBuilder {
         throw new Error('Method not implemented.');
     }
 
-    public buildFixture(team1: string, team2: string, round?: number): FixtureModel {
+    public addResult(match: MatchModel): MatchModel {
         throw new Error('Method not implemented.');
     }
 
-    public buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel {
+    public buildFixture(team1: ClubModel, team2: ClubModel, round?: number): FixtureModel {
+        throw new Error('Method not implemented.');
+    }
+
+    public buildMatch(date: Date | undefined, team1: ClubModel, team2: ClubModel, round?: number): MatchModel {
         throw new Error('Method not implemented.');
     }
 
@@ -22,11 +26,11 @@ export class HandballBuilder extends FakerBuilder {
         return {};
     }
 
-    public buildRound(roundItems: string[][], round: number): FixtureModel[] {
+    public buildRound(roundItems: ClubModel[][], round: number): FixtureModel[] {
         throw new Error('Method not implemented.');
     }
 
-    public buildRounds(teamNames: string[]): FixtureModel[][] {
+    public buildRounds(teamNames: ClubModel[]): FixtureModel[][] {
         throw new Error('Method not implemented.');
     }
 }

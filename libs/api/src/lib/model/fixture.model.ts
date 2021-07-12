@@ -1,4 +1,5 @@
 import { CompetitionTypes, SportCategoryEnum } from '../enum';
+import { ClubModel } from './club-model';
 
 export interface FixtureModel {
     competition: CompetitionTypes;
@@ -6,6 +7,6 @@ export interface FixtureModel {
     id: string;
     round?: number;
     sportCategory: SportCategoryEnum;
-    team1: string;
-    team2: string;
+    team1: ClubModel;
+    team2: ClubModel;
 }

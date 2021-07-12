@@ -1,19 +1,20 @@
 import * as faker from 'faker';
 
-import { FixtureModel, MatchModel } from '../model';
+import { ClubModel, FixtureModel, MatchModel } from '../model';
 
 export abstract class FakerBuilder {
     public abstract addDatesForRounds(rounds: FixtureModel[][], startDate: Date): FixtureModel[][];
-    public abstract buildFixture(team1: string, team2: string, round?: number): FixtureModel;
-    public abstract buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel;
-    public abstract buildRound(roundItems: string[][], round: number): FixtureModel[];
-    public abstract buildRounds(teamNames: string[]): FixtureModel[][];
+    public abstract addResult(match: MatchModel): MatchModel;
+    public abstract buildFixture(team1: ClubModel, team2: ClubModel, round?: number): FixtureModel;
+    public abstract buildMatch(date: Date | undefined, team1: ClubModel, team2: ClubModel, round?: number): MatchModel;
+    public abstract buildRound(roundItems: ClubModel[][], round: number): FixtureModel[];
+    public abstract buildRounds(teamNames: ClubModel[]): FixtureModel[][];
 
-    protected calculateHomeAway(roundItems: string[][][]): string[][][] {
+    protected calculateHomeAway(roundItems: ClubModel[][][]): ClubModel[][][] {
         const optimizedRoundItems = [roundItems[0].map((roundItem) => roundItem.reverse())];
 
         for (let i = 1; i < roundItems.length; i++) {
-            const positionMap = new Map<string, number>();
+            const positionMap = new Map<ClubModel, number>();
 
             roundItems[i - 1].forEach((roundItem) => {
                 positionMap.set(roundItem[0], 0);
@@ -34,10 +35,6 @@ export abstract class FakerBuilder {
         return optimizedRoundItems;
     }
 
-    protected createClubName(clubNames: string[]): string {
-        return faker.random.arrayElement(clubNames);
-    }
-
     protected createId(): string {
         return faker.datatype.uuid();
     }
@@ -55,15 +52,15 @@ export abstract class FakerBuilder {
         return faker.datatype.number({ min, max });
     }
 
-    protected createRoundItems(teams: string[]): string[][][] {
+    protected createRoundItems(teams: ClubModel[]): ClubModel[][][] {
         const teamsNumber = teams.length;
         const roundNumber = teamsNumber - 1;
         const halfNumber = teamsNumber / 2;
-        const rounds: string[][][] = [];
+        const rounds: ClubModel[][][] = [];
         const teamIndexes: number[] = teams.map((_, i) => i).slice(1);
 
         for (let index = 0; index < roundNumber; index++) {
-            const roundPairings: string[][] = [];
+            const roundPairings: ClubModel[][] = [];
             const newTeamIndexes = [0].concat(teamIndexes);
             const firstHalf = newTeamIndexes.slice(0, halfNumber);
             const secondHalf = newTeamIndexes.slice(halfNumber, teamsNumber).reverse();

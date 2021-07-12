@@ -3,6 +3,7 @@ import * as faker from 'faker';
 
 import { Injectable } from '@angular/core';
 import {
+    ClubModel,
     CompetitionTypes,
     FakerBuilder,
     FixtureModel,
@@ -49,7 +50,13 @@ export class FootballBuilder extends FakerBuilder {
         });
     }
 
-    public buildFixture(team1: string, team2: string, round?: number): FixtureModel {
+    public addResult(match: MatchModel): MatchModel {
+        match.result = this.buildResult();
+
+        return match;
+    }
+
+    public buildFixture(team1: ClubModel, team2: ClubModel, round?: number): FixtureModel {
         const fixture: FixtureModel = {
             id: this.createId(),
             competition: CompetitionTypes.TRAINING,
@@ -65,7 +72,7 @@ export class FootballBuilder extends FakerBuilder {
         return fixture;
     }
 
-    public buildMatch(date: Date | undefined, team1: string, team2: string, round?: number): MatchModel {
+    public buildMatch(date: Date | undefined, team1: ClubModel, team2: ClubModel, round?: number): MatchModel {
         return {
             ...this.buildFixture(team1, team2, round),
             date: date || this.createSoonDate(),
@@ -93,11 +100,11 @@ export class FootballBuilder extends FakerBuilder {
         };
     }
 
-    public buildRound(roundItems: string[][], round: number): FixtureModel[] {
+    public buildRound(roundItems: ClubModel[][], round: number): FixtureModel[] {
         return roundItems.map((roundItem) => this.buildFixture(roundItem[0], roundItem[1], round));
     }
 
-    public buildRounds(teamNames: string[]): FixtureModel[][] {
+    public buildRounds(teamNames: ClubModel[]): FixtureModel[][] {
         return this.calculateHomeAway(this.createRoundItems(teamNames)).map((roundItem, index) =>
             this.buildRound(roundItem, index)
         );

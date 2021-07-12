@@ -5,5 +5,6 @@ module.exports = {
         '<rootDir>/libs/tools/table',
         '<rootDir>/libs/util/faker',
         '<rootDir>/libs/tools/match',
+        '<rootDir>/libs/data/clubs',
     ],
 };

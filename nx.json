@@ -30,6 +30,9 @@
         "api": {
             "tags": []
         },
+        "data-clubs": {
+            "tags": []
+        },
         "tools-match": {
             "tags": []
         },

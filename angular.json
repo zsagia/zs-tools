@@ -23,6 +23,28 @@
                 }
             }
         },
+        "data-clubs": {
+            "projectType": "library",
+            "root": "libs/data/clubs",
+            "sourceRoot": "libs/data/clubs/src",
+            "prefix": "zs-tools",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/data/clubs"],
+                    "options": {
+                        "jestConfig": "libs/data/clubs/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/data/clubs/src/**/*.ts", "libs/data/clubs/src/**/*.html"]
+                    }
+                }
+            }
+        },
         "tools-match": {
             "projectType": "library",
             "root": "libs/tools/match",
