@@ -12,26 +12,35 @@ import { ReplaySubject, Subject } from 'rxjs';
 })
 export abstract class TableComponent extends BaseComponent implements OnInit {
     protected tableItems: TableItemModel[][] | undefined;
-    public selectedRound$$: Subject<TableItemModel[]>;
+    public selectedRoundTableItems$$: Subject<TableItemModel[]>;
 
     @Input()
     public matches: MatchModel[] | undefined;
+    @Input()
+    public title = 'Table';
+    @Input()
+    public selectedRoundIndex = 1;
 
     public constructor(protected tableService: TableService) {
         super();
 
-        this.selectedRound$$ = new ReplaySubject();
+        this.selectedRoundTableItems$$ = new ReplaySubject();
     }
 
     public ngOnInit(): void {
         this.tableService
-            .init$(this.matches)
+            .init$(this.matches, this.selectedRoundIndex)
             .pipe(
                 tap(() => {
-                    this.selectedRound$$.next(this.tableService.getSelectedRound());
+                    this.selectedRoundIndex = this.tableService.getTableItemsRounds().length;
+                    this.selectedRoundTableItems$$.next(this.tableService.getLatestSelectedRound());
                 }),
                 takeUntil(this.destroy$$)
             )
             .subscribe();
+    }
+
+    public onRoundIndex(): void {
+       this.selectedRoundTableItems$$.next(this.tableService.getSelectedRound(this.selectedRoundIndex));
     }
 }

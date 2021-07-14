@@ -16,17 +16,28 @@ export abstract class TableService {
     protected matches: MatchModel[] | undefined;
     protected tableItemsRounds: TableItemModel[][] = [];
     protected ruleSet = DefaultRuleSet;
+    protected selectedRoundIndex = 1;
 
-    public init$(matches: MatchModel[] | undefined): Observable<boolean> {
+    public init$(matches: MatchModel[] | undefined, selectedRoundIndex: number | undefined): Observable<boolean> {
         this.matches = matches || [];
 
         this.tableItemsRounds = this.processMatches(this.matches);
 
+        this.selectedRoundIndex = selectedRoundIndex || this.tableItemsRounds.length;
+
         return of(true);
     }
 
-    public getSelectedRound(round?: number): TableItemModel[] {
-        return this.tableItemsRounds[round || this.tableItemsRounds.length - 1];
+    public getSelectedRound(round: number): TableItemModel[] {
+        return this.tableItemsRounds[round - 1];
+    }
+
+    public getLatestSelectedRound(): TableItemModel[] {
+        return this.tableItemsRounds[this.tableItemsRounds.length - 1];
+    }
+
+    public getTableItemsRounds(): TableItemModel[][] {
+        return this.tableItemsRounds;
     }
 
     protected addPoints(
@@ -53,8 +64,8 @@ export abstract class TableService {
         return teamTableItem;
     }
 
-    protected cloneClubRoundMap(clubRoundMap: Map<ClubModel, TableItemModel>): Map<ClubModel, TableItemModel> {
-        const clonedClubRoundMap = new Map<ClubModel, TableItemModel>();
+    protected cloneClubRoundMap(clubRoundMap: Map<string, TableItemModel>): Map<string, TableItemModel> {
+        const clonedClubRoundMap = new Map<string, TableItemModel>();
 
         Array.from(clubRoundMap.entries()).forEach((entry) =>
             clonedClubRoundMap.set(entry[0], {
@@ -66,18 +77,18 @@ export abstract class TableService {
     }
 
     protected makeClubRoundsMap(matches: MatchModel[]) {
-        const clubRoundsMap = new Map<number, Map<ClubModel, TableItemModel>>();
+        const clubRoundsMap = new Map<number, Map<string, TableItemModel>>();
 
         matches.forEach((match) => {
             const team1 = match.team1;
             const team2 = match.team2;
             const round = match.round || 0;
             const clubRound =
-                clubRoundsMap.get(round) || clubRoundsMap.get(round - 1) || new Map<ClubModel, TableItemModel>();
+                clubRoundsMap.get(round) || clubRoundsMap.get(round - 1) || new Map<string, TableItemModel>();
 
-            const clubRoundMap: Map<ClubModel, TableItemModel> = this.cloneClubRoundMap(clubRound);
+            const clubRoundMap: Map<string, TableItemModel> = this.cloneClubRoundMap(clubRound);
 
-            const team1TableItem = clubRound.get(team1) || {
+            const team1TableItem = clubRoundMap.get(team1.name) || {
                 position: 0,
                 lastPosition: 0,
                 team: team1,
@@ -93,9 +104,9 @@ export abstract class TableService {
 
             this.addPoints(team1TableItem, match.result.team1Final, match.result.team2Final, this.ruleSet);
 
-            clubRoundMap.set(team1, team1TableItem);
+            clubRoundMap.set(team1.name, team1TableItem);
 
-            const team2TableItem = clubRound.get(team2) || {
+            const team2TableItem = clubRoundMap.get(team2.name) || {
                 position: 0,
                 lastPosition: 0,
                 team: team2,
@@ -111,7 +122,7 @@ export abstract class TableService {
 
             this.addPoints(team2TableItem, match.result.team2Final, match.result.team1Final, this.ruleSet);
 
-            clubRoundMap.set(team2, team2TableItem);
+            clubRoundMap.set(team2.name, team2TableItem);
 
             clubRoundsMap.set(round, clubRoundMap);
         });
@@ -131,22 +142,7 @@ export abstract class TableService {
                 roundTableItems.push(teamTableItem[1]);
             });
 
-            roundTableItems.sort(function (tableItem1, tableItem2) {
-                const pointsDifference = tableItem1.points - tableItem2.points;
-
-                if (pointsDifference !== 0) {
-                    return pointsDifference;
-                } else {
-                    const team1ScoreDifference = tableItem1.scoreFor - tableItem2.scoreAgainst;
-                    const team2ScoreDifference = tableItem1.scoreFor - tableItem2.scoreAgainst;
-
-                    if (team1ScoreDifference !== team2ScoreDifference) {
-                        return team1ScoreDifference - team2ScoreDifference;
-                    } else {
-                        return tableItem1.scoreFor - tableItem2.scoreFor;
-                    }
-                }
-            });
+            this.sortMatches(roundTableItems);
 
             roundTableItems.reverse();
 
@@ -165,5 +161,24 @@ export abstract class TableService {
         });
 
         return rounds;
+    }
+
+    private sortMatches(roundTableItems: TableItemModel[]) {
+        roundTableItems.sort(function (tableItem1, tableItem2) {
+            const pointsDifference = tableItem1.points - tableItem2.points;
+
+            if (pointsDifference !== 0) {
+                return pointsDifference;
+            } else {
+                const team1ScoreDifference = tableItem1.scoreFor - tableItem1.scoreAgainst;
+                const team2ScoreDifference = tableItem2.scoreFor - tableItem2.scoreAgainst;
+
+                if (team1ScoreDifference !== team2ScoreDifference) {
+                    return team1ScoreDifference - team2ScoreDifference;
+                } else {
+                    return tableItem1.scoreFor - tableItem2.scoreFor;
+                }
+            }
+        });
     }
 }

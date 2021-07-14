@@ -1,31 +1,52 @@
 <nz-table
-    *ngIf="selectedRound$$ | async as selectedRound"
+    *ngIf="selectedRoundTableItems$$ | async as selectedRoundTableItems"
     #table
-    [nzData]="selectedRound"
+    [nzData]="selectedRoundTableItems"
+    [nzFooter]="tableFooter"
     [nzPageSize]="100"
     [nzShowPagination]="false"
     nzSize="small"
+    [nzTitle]="tableHeader"
 >
     <thead>
         <tr>
-            <th>Position</th>
+            <th nzWidth="20px">Pos</th>
+            <th nzWidth="20px">Prev</th>
             <th>Team</th>
             <th>Played</th>
             <th>Won</th>
             <th>Drawn</th>
             <th>Lost</th>
+            <th>SF - SA</th>
             <th>Points</th>
         </tr>
     </thead>
+
     <tbody>
         <tr *ngFor="let tableItem of table.data">
             <td>{{ tableItem.position }}</td>
+            <td>{{ tableItem.lastPosition }}</td>
             <td>{{ tableItem.team.name }}</td>
             <td>{{ tableItem.played }}</td>
             <td>{{ tableItem.won }}</td>
             <td>{{ tableItem.drawn }}</td>
             <td>{{ tableItem.lost }}</td>
+            <td>{{ tableItem.scoreFor }} - {{ tableItem.scoreAgainst }}</td>
             <td>{{ tableItem.points }}</td>
         </tr>
     </tbody>
 </nz-table>
+
+<ng-template #tableHeader>
+  <div>
+    <span>{{ title }}</span>
+
+    <span>Round: <nz-input-number [(ngModel)]="selectedRoundIndex" [nzMin]="1" [nzMax]="11" [nzStep]="1" (ngModelChange)="onRoundIndex()"></nz-input-number></span>
+  </div>
+</ng-template>
+
+<ng-template #tableFooter>
+  <div>
+    
+  </div>
+</ng-template>
