@@ -1,7 +1,7 @@
 import { ReplaySubject, Subject } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FootballMatchModel, ModelFactory } from '@zs-tools/api';
+import { FootballMatchModel, MatchModel, ModelFactory } from '@zs-tools/api';
 import { FootballBuilder } from '@zs-tools/util/faker';
 import { MatchViewModeEnum } from '@zs-tools/tools/match';
 import { KeyValue } from '@angular/common';
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     public match: FootballMatchModel | undefined;
     public match2: FootballMatchModel | undefined;
     public rounds: FootballMatchModel[][] | undefined;
+    public matches$$: Subject<MatchModel[]>;
     public matchLists$$: Subject<KeyValue<string, FootballMatchModel[]>[]>;
     public title = 'zs-tools-demo';
     public mode = MatchViewModeEnum.LEFT;
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
     public constructor(private modelFactory: ModelFactory, private footballBuilder: FootballBuilder) {
         this.component$$ = new ReplaySubject();
         this.inputs$$ = new ReplaySubject();
+        this.matches$$ = new ReplaySubject();
         this.matchLists$$ = new ReplaySubject();
     }
 
@@ -49,7 +51,17 @@ export class AppComponent implements OnInit {
 
         console.log(this.match);
 
-        this.matchLists$$.next(this.createMatchLists(this.rounds));
+        const matchList = this.createMatchLists(this.rounds);
+        const matches: MatchModel[] = [];
+
+        Array.from(matchList.entries()).reduce((items, entry) => {
+            items.push(...entry[1].value);
+
+            return items;
+        }, matches);
+
+        this.matchLists$$.next(matchList);
+        this.matches$$.next(matches);
 
         this.rounds = [
             ...this.rounds.map((round) =>

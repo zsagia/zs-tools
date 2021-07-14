@@ -1,2 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ResultModel {}
+export interface ResultModel {
+    team1Final: number;
+    team2Final: number;
+}

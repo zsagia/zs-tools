@@ -22,10 +22,6 @@ export class HandballBuilder extends FakerBuilder {
         throw new Error('Method not implemented.');
     }
 
-    public buildResult(): ResultModel {
-        return {};
-    }
-
     public buildRound(roundItems: ClubModel[][], round: number): FixtureModel[] {
         throw new Error('Method not implemented.');
     }

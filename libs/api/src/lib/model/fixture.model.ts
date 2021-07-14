@@ -1,5 +1,5 @@
 import { CompetitionTypes, SportCategoryEnum } from '../enum';
-import { ClubModel } from './club-model';
+import { ClubModel } from './club.model';
 
 export interface FixtureModel {
     competition: CompetitionTypes;

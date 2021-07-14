@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FootballMatchModule } from '@zs-tools/tools/match';
 import { FootballFakerModule } from '@zs-tools/util/faker';
+import { FootballTableModule } from '@zs-tools/tools/table';
 
 import { AppComponent } from './app.component';
 
@@ -26,6 +27,7 @@ registerLocaleData(en);
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        FootballTableModule,
     ],
     bootstrap: [AppComponent],
     providers: [{ provide: NZ_I18N, useValue: en_US }],

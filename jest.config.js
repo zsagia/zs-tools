@@ -6,5 +6,6 @@ module.exports = {
         '<rootDir>/libs/util/faker',
         '<rootDir>/libs/tools/match',
         '<rootDir>/libs/data/clubs',
+        '<rootDir>/libs/data/rules',
     ],
 };

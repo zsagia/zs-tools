@@ -1,1 +1,31 @@
-<p>football-table works!</p>
+<nz-table
+    *ngIf="selectedRound$$ | async as selectedRound"
+    #table
+    [nzData]="selectedRound"
+    [nzPageSize]="100"
+    [nzShowPagination]="false"
+    nzSize="small"
+>
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Played</th>
+            <th>Won</th>
+            <th>Drawn</th>
+            <th>Lost</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tableItem of table.data">
+            <td>{{ tableItem.position }}</td>
+            <td>{{ tableItem.team.name }}</td>
+            <td>{{ tableItem.played }}</td>
+            <td>{{ tableItem.won }}</td>
+            <td>{{ tableItem.drawn }}</td>
+            <td>{{ tableItem.lost }}</td>
+            <td>{{ tableItem.points }}</td>
+        </tr>
+    </tbody>
+</nz-table>
