@@ -23,7 +23,7 @@
     </thead>
 
     <tbody>
-        <tr *ngFor="let tableItem of table.data">
+        <tr *ngFor="let tableItem of table.data; trackBy: trackByItem">
             <td>{{ tableItem.position }}</td>
             <td>{{ tableItem.lastPosition }}</td>
             <td>{{ tableItem.team.name }}</td>
@@ -38,15 +38,22 @@
 </nz-table>
 
 <ng-template #tableHeader>
-  <div>
-    <span>{{ title }}</span>
+    <div>
+        <span>{{ title }}</span>
 
-    <span>Round: <nz-input-number [(ngModel)]="selectedRoundIndex" [nzMin]="1" [nzMax]="11" [nzStep]="1" (ngModelChange)="onRoundIndex()"></nz-input-number></span>
-  </div>
+        <span
+            >Round:
+            <nz-input-number
+                [(ngModel)]="selectedRoundIndex"
+                [nzMin]="1"
+                [nzMax]="11"
+                [nzStep]="1"
+                (ngModelChange)="onRoundIndex()"
+            ></nz-input-number
+        ></span>
+    </div>
 </ng-template>
 
 <ng-template #tableFooter>
-  <div>
-    
-  </div>
+    <div></div>
 </ng-template>
