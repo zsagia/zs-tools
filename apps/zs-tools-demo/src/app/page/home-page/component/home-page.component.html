@@ -1,70 +1,57 @@
 <div>
-    <section>
-        <zs-football-match
-            [showHeader]="false"
-            [mode]="mode"
-            [showTimeAsSeparator]="true"
-            [match]="match"
-        ></zs-football-match>
-        <zs-football-match
-            [showHeader]="false"
-            [mode]="mode"
-            [showTimeAsSeparator]="true"
-            [match]="match2"
-        ></zs-football-match>
-    </section>
+    <nz-header></nz-header>
 
-    <section>
-        <zs-football-match [mode]="mode" [match]="match"></zs-football-match>
-        <zs-football-match [mode]="mode" [match]="match2"></zs-football-match>
-    </section>
+    <nz-content>
+        <section>
+            <zs-football-match [showHeader]="false" [mode]="mode" [showTimeAsSeparator]="true" [match]="match">
+            </zs-football-match>
+            <zs-football-match [showHeader]="false" [mode]="mode" [showTimeAsSeparator]="true" [match]="match2">
+            </zs-football-match>
+        </section>
 
-    <section>
-        <zs-football-match
-            [mode]="mode"
-            [showHeader]="true"
-            [showTimeAsSeparator]="false"
-            [match]="match"
-        ></zs-football-match>
-        <zs-football-match
-            [mode]="mode"
-            [showHeader]="true"
-            [showTimeAsSeparator]="false"
-            [match]="match2"
-        ></zs-football-match>
-    </section>
+        <section>
+            <zs-football-match [mode]="mode" [match]="match"></zs-football-match>
+            <zs-football-match [mode]="mode" [match]="match2"></zs-football-match>
+        </section>
 
-    <section>
-        <zs-football-match [mode]="mode" [showHeader]="false" [showResult]="true" [match]="match"></zs-football-match>
-        <zs-football-match [mode]="mode" [showHeader]="false" [showResult]="true" [match]="match2"></zs-football-match>
-    </section>
+        <section>
+            <zs-football-match [mode]="mode" [showHeader]="true" [showTimeAsSeparator]="false" [match]="match">
+            </zs-football-match>
+            <zs-football-match [mode]="mode" [showHeader]="true" [showTimeAsSeparator]="false" [match]="match2">
+            </zs-football-match>
+        </section>
 
-    <section>
-        <div class="round" *ngFor="let round of rounds; let i = index">
-            <header>Round {{ i + 1 }}.</header>
+        <section>
+            <zs-football-match [mode]="mode" [showHeader]="false" [showResult]="true" [match]="match">
+            </zs-football-match>
+            <zs-football-match [mode]="mode" [showHeader]="false" [showResult]="true" [match]="match2">
+            </zs-football-match>
+        </section>
 
-            <div class="matches">
-                <zs-football-match *ngFor="let match of round" [match]="match" [showResult]="true"></zs-football-match>
+        <section>
+            <div class="round" *ngFor="let round of rounds; let i = index">
+                <header>Round {{ i + 1 }}.</header>
+
+                <div class="matches">
+                    <zs-football-match *ngFor="let match of round" [match]="match" [showResult]="true">
+                    </zs-football-match>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <div class="match-list" *ngFor="let entry of matchLists$$ | async">
-            <header>{{ entry.key }}</header>
+        <section>
+            <div class="match-list" *ngFor="let entry of matchLists$$ | async">
+                <header>{{ entry.key }}</header>
 
-            <div class="matches">
-                <zs-football-match
-                    *ngFor="let match of entry.value"
-                    [match]="match"
-                    [showTimeAsSeparator]="true"
-                    [mode]="mode"
-                ></zs-football-match>
+                <div class="matches">
+                    <zs-football-match *ngFor="let match of entry.value" [match]="match" [showTimeAsSeparator]="true"
+                        [mode]="mode"></zs-football-match>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <zs-football-table *ngIf="matches$$ | async as matches" [matches]="matches"></zs-football-table>
-    </section>
+        <section>
+            <zs-football-table *ngIf="matches$$ | async as matches" [matches]="matches"></zs-football-table>
+        </section>
+    </nz-content>
 </div>

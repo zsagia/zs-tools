@@ -14,6 +14,13 @@ export const routes = [
             breadcrumb: 'home',
         },
     },
+    {
+        path: 'football',
+        loadChildren: () => import('./page/football-page/football-page.module').then((module) => module.FootballPageModule),
+        data: {
+            breadcrumb: 'football',
+        },
+    },
 ];
 
 @NgModule({

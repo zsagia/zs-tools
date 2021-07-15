@@ -1,7 +1,42 @@
-<header class="flex">
-    <h1>Welcome to {{ title }}!</h1>
-</header>
+<nz-layout class="layout">
+    <nz-sider>
+        <div class="logo"></div>
 
-<main>
-    <router-outlet></router-outlet>
-</main>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+            <li nz-menu-item nzSelected>
+                <i nz-icon nzType="file"></i>
+                <a routerLink="/home"><span>Home</span></a>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="file"></i>
+                <a routerLink="/football"><span>Football</span></a>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="video-camera"></i>
+
+                <span>Handball</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="upload"></i>
+
+                <span>Basketball</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="bar-chart"></i>
+
+                <span>Volleyball</span>
+            </li>
+            <li nz-menu-item>
+                <i nz-icon nzType="cloud-o"></i>
+
+                <span>Icehockey</span>
+            </li>
+        </ul>
+    </nz-sider>
+
+    <nz-layout class="right-layout">
+        <router-outlet></router-outlet>
+
+        <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    </nz-layout>
+</nz-layout>

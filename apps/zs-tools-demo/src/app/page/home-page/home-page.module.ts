@@ -1,4 +1,5 @@
 import { DynamicIoModule, DynamicModule } from 'ng-dynamic-component';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,7 @@ import { HomePageRouterModule } from './home-page-router.module';
         FootballFakerModule,
         FootballTableModule,
         FootballMatchModule,
+        NzLayoutModule
     ],
 })
 export class HomePageModule {}
