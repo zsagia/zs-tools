@@ -9,14 +9,12 @@ import { startOfDay } from 'date-fns';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'zs-tools-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.less'],
+    selector: 'zs-tools-home-page',
+    templateUrl: './home-page.component.html',
+    styleUrls: ['./home-page.component.less'],
 })
-export class AppComponent implements OnInit {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+export class HomePageComponent implements OnInit {
     public component$$: Subject<any> | undefined;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public inputs$$: Subject<any> | undefined;
     public match: FootballMatchModel | undefined;
     public match2: FootballMatchModel | undefined;

@@ -1,8 +1,4 @@
-<header class="flex">
-    <h1>Welcome to {{ title }}!</h1>
-</header>
-
-<main>
+<div>
     <section>
         <zs-football-match
             [showHeader]="false"
@@ -71,4 +67,4 @@
     <section>
         <zs-football-table *ngIf="matches$$ | async as matches" [matches]="matches"></zs-football-table>
     </section>
-</main>
+</div>
