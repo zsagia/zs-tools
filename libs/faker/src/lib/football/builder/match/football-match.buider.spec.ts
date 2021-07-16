@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FootballBuilder } from './football.builder';
+import { FootballMatchBuilder } from './football-match.builder';
 
-describe('FootballBuilder', () => {
-    let service: FootballBuilder;
+describe('FootballMatchBuilder', () => {
+    let service: FootballMatchBuilder;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(FootballBuilder);
+        service = TestBed.inject(FootballMatchBuilder);
     });
 
     it('should be created', () => {

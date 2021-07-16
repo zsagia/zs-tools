@@ -2,7 +2,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FootballMatchModel, MatchModel, ModelFactory } from '@zs-tools/api';
-import { FootballBuilder } from '@zs-tools/util/faker';
+import { FootballMatchBuilder } from '@zs-tools/faker';
 import { MatchViewModeEnum } from '@zs-tools/tools/match';
 import { KeyValue } from '@angular/common';
 import { startOfDay } from 'date-fns';
@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
     public title = 'zs-tools-demo';
     public mode = MatchViewModeEnum.LEFT;
 
-    public constructor(private modelFactory: ModelFactory, private footballBuilder: FootballBuilder) {
+    public constructor(private modelFactory: ModelFactory, private footballMatchBuilder: FootballMatchBuilder) {
         this.component$$ = new ReplaySubject();
         this.inputs$$ = new ReplaySubject();
         this.matches$$ = new ReplaySubject();
@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit {
 
         this.rounds = this.modelFactory.createRounds() as FootballMatchModel[][];
 
-        const modifiedRounds = this.footballBuilder.addDatesForRounds(this.rounds, new Date());
+        const modifiedRounds = this.footballMatchBuilder.addDatesForRounds(this.rounds, new Date());
 
         console.log(this.rounds);
         console.log(modifiedRounds);
@@ -64,7 +64,7 @@ export class HomePageComponent implements OnInit {
         this.rounds = [
             ...this.rounds.map((round) =>
                 round.map((match) => {
-                    this.footballBuilder.addResult(match);
+                    this.footballMatchBuilder.addResult(match);
                     this.rounds = [...modifiedRounds] as FootballMatchModel[][];
 
                     return match;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ClubModel, FakerBuilder, FixtureModel, MatchModel, ResultModel } from '@zs-tools/api';
 
 @Injectable()
-export class HandballBuilder extends FakerBuilder {
+export class HandballMatchBuilder extends FakerBuilder {
     public readonly MAX_GOALS = 3;
     public readonly MIN_GOALS = 0;
 

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HandballBuilder } from './handball.builder';
+import { HandballMatchBuilder } from './handball-match.builder';
 
-describe('HandballBuilder', () => {
-    let service: HandballBuilder;
+describe('HandballMatchBuilder', () => {
+    let service: HandballMatchBuilder;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(HandballBuilder);
+        service = TestBed.inject(HandballMatchBuilder);
     });
 
     it('should be created', () => {

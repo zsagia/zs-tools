@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FootballMatchModule } from '@zs-tools/tools/match';
 import { FootballTableModule } from '@zs-tools/tools/table';
-import { FootballFakerModule } from '@zs-tools/util/faker';
+import { FootballFakerModule } from '@zs-tools/faker';
 
 import { HomePageComponent } from './component';
 import { HomePageRouterModule } from './home-page-router.module';
