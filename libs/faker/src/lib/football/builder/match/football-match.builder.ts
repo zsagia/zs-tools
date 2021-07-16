@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import {
     ClubModel,
     CompetitionTypes,
-    FakerBuilder,
+    MatchBuilder,
     FixtureModel,
     FootballMatchResultModel,
     MatchModel,
@@ -13,7 +13,7 @@ import {
 } from '@zs-tools/api';
 
 @Injectable()
-export class FootballMatchBuilder extends FakerBuilder {
+export class FootballMatchBuilder extends MatchBuilder {
     public readonly TEAM1_GOALS = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 4];
     public readonly TEAM2_GOALS = [0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
 

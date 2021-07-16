@@ -2,7 +2,7 @@ import * as faker from 'faker';
 
 import { ClubModel, FixtureModel, MatchModel } from '../model';
 
-export abstract class FakerBuilder {
+export abstract class MatchBuilder {
     public abstract addDatesForRounds(rounds: FixtureModel[][], startDate: Date): FixtureModel[][];
     public abstract addResult(match: MatchModel): MatchModel;
     public abstract buildFixture(team1: ClubModel, team2: ClubModel, round?: number): FixtureModel;
