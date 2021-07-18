@@ -1,4 +1,4 @@
-import { MatchModel } from '../model';
+import { MatchModel } from '../match.model';
 import { FootballMatchResultModel } from './footbal-match-result.model';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

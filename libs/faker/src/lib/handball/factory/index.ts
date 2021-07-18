@@ -1,1 +1,1 @@
-export * from './handball-model.factory';
+export * from './match';

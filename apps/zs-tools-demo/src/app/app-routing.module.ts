@@ -16,7 +16,8 @@ export const routes = [
     },
     {
         path: 'football',
-        loadChildren: () => import('./page/football-page/football-page.module').then((module) => module.FootballPageModule),
+        loadChildren: () =>
+            import('./page/football-page/football-page.module').then((module) => module.FootballPageModule),
         data: {
             breadcrumb: 'football',
         },

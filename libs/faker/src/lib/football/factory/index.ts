@@ -1,1 +1,1 @@
-export * from './football-model.factory';
+export * from './match';

@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ModelFactory } from '@zs-tools/api';
+import { MatchFactory } from '@zs-tools/api';
 
 import { HandballMatchBuilder } from './builder';
-import { HandballModelFactory } from './factory';
+import { HandballMatchFactory } from './factory';
 
 @NgModule({
     imports: [CommonModule],
     providers: [
         HandballMatchBuilder,
         {
-            provide: ModelFactory,
-            useClass: HandballModelFactory,
+            provide: MatchFactory,
+            useClass: HandballMatchFactory,
         },
     ],
 })

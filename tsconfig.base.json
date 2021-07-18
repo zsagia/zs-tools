@@ -18,9 +18,9 @@
             "@zs-tools/api": ["libs/api/src/index.ts"],
             "@zs-tools/data/clubs": ["libs/data/clubs/src/index.ts"],
             "@zs-tools/data/rules": ["libs/data/rules/src/index.ts"],
+            "@zs-tools/faker": ["libs/faker/src/index.ts"],
             "@zs-tools/tools/match": ["libs/tools/match/src/index.ts"],
-            "@zs-tools/tools/table": ["libs/tools/table/src/index.ts"],
-            "@zs-tools/faker": ["libs/faker/src/index.ts"]
+            "@zs-tools/tools/table": ["libs/tools/table/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

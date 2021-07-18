@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { FixtureModel, MatchModel, ModelFactory } from '@zs-tools/api';
+import { FixtureModel, MatchFactory, MatchModel } from '@zs-tools/api';
 
-import { HandballMatchBuilder } from '../builder';
+import { HandballMatchBuilder } from '../../builder';
 
 @Injectable()
-export class HandballModelFactory extends ModelFactory {
+export class HandballMatchFactory extends MatchFactory {
     public constructor(private handballMatchBuilder: HandballMatchBuilder) {
         super();
     }

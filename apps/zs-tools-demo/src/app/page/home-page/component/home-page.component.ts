@@ -1,7 +1,7 @@
 import { ReplaySubject, Subject } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FootballMatchModel, MatchModel, ModelFactory } from '@zs-tools/api';
+import { FootballMatchModel, MatchModel, MatchFactory, TeamMemberFactory } from '@zs-tools/api';
 import { FootballMatchBuilder } from '@zs-tools/faker';
 import { MatchViewModeEnum } from '@zs-tools/tools/match';
 import { KeyValue } from '@angular/common';
@@ -24,7 +24,11 @@ export class HomePageComponent implements OnInit {
     public title = 'zs-tools-demo';
     public mode = MatchViewModeEnum.LEFT;
 
-    public constructor(private modelFactory: ModelFactory, private footballMatchBuilder: FootballMatchBuilder) {
+    public constructor(
+        private teamMemberFactory: TeamMemberFactory,
+        private matchFactory: MatchFactory,
+        private footballMatchBuilder: FootballMatchBuilder
+    ) {
         this.component$$ = new ReplaySubject();
         this.inputs$$ = new ReplaySubject();
         this.matches$$ = new ReplaySubject();
@@ -32,10 +36,10 @@ export class HomePageComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.match = this.modelFactory.createMatch() as FootballMatchModel;
-        this.match2 = this.modelFactory.createMatch() as FootballMatchModel;
+        this.match = this.matchFactory.createMatch() as FootballMatchModel;
+        this.match2 = this.matchFactory.createMatch() as FootballMatchModel;
 
-        this.rounds = this.modelFactory.createRounds() as FootballMatchModel[][];
+        this.rounds = this.matchFactory.createRounds() as FootballMatchModel[][];
 
         const modifiedRounds = this.footballMatchBuilder.addDatesForRounds(this.rounds, new Date());
 
@@ -71,6 +75,10 @@ export class HomePageComponent implements OnInit {
                 })
             ),
         ];
+
+        const person = this.teamMemberFactory.createMale('hu', 10, 12);
+
+        console.log(person);
     }
 
     private createMatchLists(rounds: FootballMatchModel[][]): KeyValue<string, FootballMatchModel[]>[] {

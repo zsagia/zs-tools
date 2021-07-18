@@ -1,4 +1,4 @@
-import { ResultModel } from '../model';
+import { ResultModel } from '../result.model';
 
 export interface FootballMatchResultModel extends ResultModel {
     team1Half1: number;

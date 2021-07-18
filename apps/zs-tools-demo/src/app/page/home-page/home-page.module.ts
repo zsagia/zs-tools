@@ -22,7 +22,7 @@ import { HomePageRouterModule } from './home-page-router.module';
         FootballFakerModule,
         FootballTableModule,
         FootballMatchModule,
-        NzLayoutModule
+        NzLayoutModule,
     ],
 })
 export class HomePageModule {}

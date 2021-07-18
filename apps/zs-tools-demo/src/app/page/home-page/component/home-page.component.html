@@ -44,8 +44,12 @@
                 <header>{{ entry.key }}</header>
 
                 <div class="matches">
-                    <zs-football-match *ngFor="let match of entry.value" [match]="match" [showTimeAsSeparator]="true"
-                        [mode]="mode"></zs-football-match>
+                    <zs-football-match
+                        *ngFor="let match of entry.value"
+                        [match]="match"
+                        [showTimeAsSeparator]="true"
+                        [mode]="mode"
+                    ></zs-football-match>
                 </div>
             </div>
         </section>

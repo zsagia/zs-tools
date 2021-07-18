@@ -67,6 +67,28 @@
                 }
             }
         },
+        "faker": {
+            "projectType": "library",
+            "root": "libs/faker",
+            "sourceRoot": "libs/faker/src",
+            "prefix": "zs-tools",
+            "architect": {
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/faker"],
+                    "options": {
+                        "jestConfig": "libs/faker/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/faker/src/**/*.ts", "libs/faker/src/**/*.html"]
+                    }
+                }
+            }
+        },
         "tools-match": {
             "projectType": "library",
             "root": "libs/tools/match",
@@ -107,28 +129,6 @@
                     "builder": "@nrwl/linter:eslint",
                     "options": {
                         "lintFilePatterns": ["libs/tools/table/src/**/*.ts", "libs/tools/table/src/**/*.html"]
-                    }
-                }
-            }
-        },
-        "faker": {
-            "projectType": "library",
-            "root": "libs/faker",
-            "sourceRoot": "libs/faker/src",
-            "prefix": "zs-tools",
-            "architect": {
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/faker"],
-                    "options": {
-                        "jestConfig": "libs/faker/jest.config.js",
-                        "passWithNoTests": true
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:eslint",
-                    "options": {
-                        "lintFilePatterns": ["libs/faker/src/**/*.ts", "libs/faker/src/**/*.html"]
                     }
                 }
             }
