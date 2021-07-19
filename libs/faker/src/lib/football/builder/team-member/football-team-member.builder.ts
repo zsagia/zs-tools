@@ -3,116 +3,7 @@ import * as faker from 'faker';
 
 import { Injectable } from '@angular/core';
 import { PersonModel, TeamMemberBuilder } from '@zs-tools/api';
-
-export const FIRST_NAMES_MALE = [
-    'Balázs',
-    'Tibor',
-    'János',
-    'Kevin',
-    'Áron',
-    'Bence',
-    'Dávid',
-    'Zsolt',
-    'Máté',
-    'Tamás',
-    'Péter',
-    'Patrik',
-    'Dániel',
-    'Milán',
-    'László',
-    'Sándor',
-    'Attila',
-];
-export const FIRST_NAMES_FEMALE = [
-    'Nina',
-    'Liza',
-    'Gréta',
-    'Blanka',
-    'Petra',
-    'Laura',
-    'Johanna',
-    'Dóra',
-    'Flóra',
-    'Henrietta',
-    'Emma',
-    'Dorka',
-    'Kíra',
-    'Bernadett',
-    'Eszter',
-    'Szilvia',
-    'Éva',
-    'Dalma',
-    'Noémi',
-    'Kitti',
-    'Mónika',
-];
-export const SECOND_NAMES = [
-    'Hódosi',
-    'Rédei',
-    'Rédai',
-    'Schmid',
-    'Tóvizi',
-    'Kerekes',
-    'Kaszás',
-    'Csatári',
-    'Vezendi',
-    'Szántó',
-    'Egri',
-    'Simon',
-    'Simonyi',
-    'Siró',
-    'Síró',
-    'Gidófalvi',
-    'Balázs',
-    'Csomor',
-    'Illés',
-    'Illyés',
-    'Thurzó',
-    'Kerepesi',
-    'Jóga',
-    'Metz',
-    'Beck',
-    'Becker',
-    'Komlósi',
-    'Gócs',
-    'Csicsek',
-    'Könnyű',
-    'Oláh',
-    'Tar',
-    'Kegyes',
-    'Kovácsevics',
-    'Szilágyi',
-    'Vaskó',
-    'Vaszkó',
-    'Árpád',
-    'Kelemen',
-    'Kemencés',
-    'Szántai',
-    'Suhajda',
-    'Hidvégi',
-    'Bóka',
-    'Kozma',
-    'Szepesi',
-    'Príbeli',
-    'Szabó',
-    'Kovács',
-    'Molnár',
-    'Kiss',
-    'Kis',
-    'Tóth',
-    'Németh',
-    'Vajda',
-    'Széles',
-    'Somogyi',
-    'Borbély',
-    'Bartha',
-    'Éles',
-    'Fazekas',
-    'Miklós',
-    'Ligetvári',
-    'Lukács',
-    'Lékai',
-];
+import { LocaleNames, NAMES } from '../../constant';
 
 @Injectable()
 export class FootballTeamMemberBuilder extends TeamMemberBuilder {
@@ -121,11 +12,24 @@ export class FootballTeamMemberBuilder extends TeamMemberBuilder {
     }
 
     public buildPerson(locale: string, gender: string, minAge: number, maxAge: number): PersonModel {
+        let names: LocaleNames | undefined;
+
+        switch (locale) {
+            case 'hu':
+                names = NAMES.hu;
+
+                break;
+            default:
+                throw new Error();
+
+                break;
+        }
+
         return {
             avatar: faker.image.avatar(),
             gender,
-            firstName: faker.random.arrayElement(gender === 'male' ? FIRST_NAMES_MALE : FIRST_NAMES_FEMALE),
-            lastName: faker.random.arrayElement(SECOND_NAMES),
+            firstName: faker.random.arrayElement(gender === 'male' ? names.firstNamesMale : names.firstNamesFemale),
+            lastName: faker.random.arrayElement(names.secondNames),
             birthDay: faker.date.between(
                 subYears(startOfYear(new Date()), minAge),
                 subYears(startOfYear(new Date()), maxAge)

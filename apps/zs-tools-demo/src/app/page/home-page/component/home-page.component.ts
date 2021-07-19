@@ -1,7 +1,7 @@
 import { ReplaySubject, Subject } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FootballMatchModel, MatchModel, MatchFactory, TeamMemberFactory } from '@zs-tools/api';
+import { FootballMatchModel, MatchModel, MatchFactory, TeamMemberFactory, Locales } from '@zs-tools/api';
 import { FootballMatchBuilder } from '@zs-tools/faker';
 import { MatchViewModeEnum } from '@zs-tools/tools/match';
 import { KeyValue } from '@angular/common';
@@ -76,7 +76,7 @@ export class HomePageComponent implements OnInit {
             ),
         ];
 
-        const person = this.teamMemberFactory.createMale('hu', 10, 12);
+        const person = this.teamMemberFactory.createMale(Locales.hu, 10, 12);
 
         console.log(person);
     }
